@@ -1,0 +1,13 @@
+Mit Rundem Schlüssel Safe öffnen
+Maschine fragt nach 3 farben
+Reihenfolge der Farben ist die gleiche Reihenfolge wie die Blumen Farben im anderen Raum
+Wenn richtig beantwortet zeigt laser auf Boden
+Wenn mit Crowbar auf Boden benutzt wird öffnet sich ein Loch mit Erde.
+Im anderen Loch gibt es einen SChalter
+Schalter klemmt aber mit Crowbar kan man ihn betätigen.
+Wenn SChalter an öffnet sich ein Fach mit Seeds
+Seed können in Erde gelegt werden und mit Bowl + Wasser bewässert werden
+Wenn bewässert kommt riesige Pflanze und bircht Dach
+Schlüssel fällt auf den Boden
+Schlüssel mit Rüe öffnet diese
+Ende

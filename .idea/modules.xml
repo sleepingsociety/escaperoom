@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/escaperoom.iml" filepath="$PROJECT_DIR$/.idea/escaperoom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EscapeRoom.iml" filepath="$PROJECT_DIR$/EscapeRoom.iml" />
     </modules>
   </component>
 </project>

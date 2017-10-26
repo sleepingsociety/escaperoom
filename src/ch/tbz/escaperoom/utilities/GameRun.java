@@ -24,12 +24,16 @@ public class GameRun {
 		this.gameHasBegun = gameHasBegun;
 	}
 	
-	public ImageIcon getSinuglarImage(int i) {
+	public ImageIcon getSingularImage(int i) {
 		return images[i];
 	}
 	
 	public void setImages(String input, int number) {
 		this.images[number] = new ImageIcon(input);
+	}
+	
+	public void removeItem(String input) {
+		this.inventory.remove(input);
 	}
 	
 	private ArrayList<String> inventory = new ArrayList<>();
@@ -42,6 +46,8 @@ public class GameRun {
 	public boolean isMarkerVisible = false;
 	public boolean isKeyVisible = false;
 	public boolean isCouchOpen = false;
+	public boolean isSeedInGround = false;
+	public boolean isDeviceActivated = false;
 	
 	public GameRun() {
 		inventory = new ArrayList<>();

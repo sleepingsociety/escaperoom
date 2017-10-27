@@ -103,7 +103,7 @@ public class GameScreen {
 		
 		JButton btnRestart = new JButton("Restart");
 		btnRestart.setBounds(10, 664, 89, 23);
-		frame.getContentPane().add(btnRestart);
+		frame.getContentPane().add(btnRestart)
 		
 		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
 	}

@@ -79,6 +79,11 @@ public class GameScreen {
 		gameFeed.setColumns(4);
 		
 		inputField = new JTextField();
+		inputField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				validateInput(inputField.getText());
+			}
+		});
 		inputField.setBounds(10, 576, 530, 77);
 		frame.getContentPane().add(inputField);
 		inputField.setColumns(10);
@@ -89,21 +94,12 @@ public class GameScreen {
 				inputField.setText("");
 			}
 		});
-		btnClearField.setBounds(352, 664, 89, 23);
+		btnClearField.setBounds(451, 664, 100, 23);
 		frame.getContentPane().add(btnClearField);
-		
-		JButton btnSend = new JButton("Send");
-		btnSend.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				validateInput(inputField.getText());
-			}
-		});
-		btnSend.setBounds(451, 664, 89, 23);
-		frame.getContentPane().add(btnSend);
 		
 		JButton btnRestart = new JButton("Restart");
 		btnRestart.setBounds(10, 664, 89, 23);
-		frame.getContentPane().add(btnRestart)
+		frame.getContentPane().add(btnRestart);
 		
 		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
 	}

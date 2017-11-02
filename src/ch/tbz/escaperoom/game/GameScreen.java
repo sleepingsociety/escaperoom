@@ -7,7 +7,9 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import ch.tbz.escaperoom.utilities.GameRun;
 
@@ -25,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class GameScreen {
 
@@ -34,6 +38,8 @@ public class GameScreen {
 	JTextArea gameFeed = new JTextArea();
 	private GameRun run;
 	private int currentRoom;
+	private int passedMinutes = 5;
+	private Timer tim = null;
 
 	/**
 	 * Launch the application.
@@ -63,8 +69,25 @@ public class GameScreen {
 	 */
 	private void initialize() {
 		
+		tim = new Timer(60 * 1000, new ActionListener() { 
+        	int passedMinutes = 5;
+	        public void actionPerformed(ActionEvent e) { 
+	            if (!run.isGameHasBegun())
+	                passedMinutes = passedMinutes -1;
+	            	JOptionPane.showMessageDialog(null, "Noch " + passedMinutes + " Minuten Zeit");
+	            if(passedMinutes == 0){
+	           	 passedMinutes = 0;
+	           	 JOptionPane.showMessageDialog(null, "Die Zeit ist abgelaufen");
+	           	 timeIsOver();
+	           	 passedMinutes = 5;
+	            }
+	        } 
+		});
+		tim.setRepeats(true);
+		
+		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 566, 734);
+		frame.setBounds(100, 100, 566, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -73,7 +96,7 @@ public class GameScreen {
 		frame.getContentPane().add(background);
 		
 
-		gameFeed.setBounds(10, 507, 530, 58);
+		gameFeed.setBounds(10, 556, 530, 58);
 		gameFeed.setEditable(false);
 		frame.getContentPane().add(gameFeed);
 		gameFeed.setColumns(4);
@@ -82,9 +105,10 @@ public class GameScreen {
 		inputField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				validateInput(inputField.getText());
+				inputField.setText("");
 			}
 		});
-		inputField.setBounds(10, 576, 530, 77);
+		inputField.setBounds(10, 627, 530, 77);
 		frame.getContentPane().add(inputField);
 		inputField.setColumns(10);
 		
@@ -94,14 +118,68 @@ public class GameScreen {
 				inputField.setText("");
 			}
 		});
-		btnClearField.setBounds(451, 664, 100, 23);
+		btnClearField.setBounds(436, 717, 100, 23);
 		frame.getContentPane().add(btnClearField);
 		
 		JButton btnRestart = new JButton("Restart");
-		btnRestart.setBounds(10, 664, 89, 23);
+		btnRestart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resetGame();
+			}
+		});
+		btnRestart.setBounds(10, 717, 89, 23);
 		frame.getContentPane().add(btnRestart);
 		
 		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
+		
+		JTextArea txtrUmDichNach = new JTextArea();
+		txtrUmDichNach.setLineWrap(true);
+		txtrUmDichNach.setBackground(SystemColor.control);
+		txtrUmDichNach.setEditable(false);
+		txtrUmDichNach.setRows(3);
+		txtrUmDichNach.setText("Um dich nach Rechts zu drehen, schreibe \"Rechts\" und um dich nachLinks zu drehen, schreibe \"Links\"");
+		txtrUmDichNach.setBounds(10, 503, 530, 40);
+		frame.getContentPane().add(txtrUmDichNach);
+	}
+	
+	private void start(String input) {
+		run = new GameRun();
+		background.setIcon(run.getSingularImage(0));
+		tim.start();
+		passedMinutes = 5;
+	}
+	
+	
+	private void timeIsOver(){
+		run = new GameRun();
+		gameFeed.setText("Ups. Die Zeit ist abgelaufen");
+		currentRoom = 0;
+		passedMinutes = 0;
+		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
+		tim.stop();
+	}
+	
+	private void resetGame(){
+		run = new GameRun();
+		currentRoom = 0;
+		passedMinutes = 0;
+		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
+		tim.stop();
+		tim = new Timer(60 * 1000, new ActionListener() { 
+        	int passedMinutes = 5;
+	        public void actionPerformed(ActionEvent e) { 
+	            if (!run.isGameHasBegun())
+	                passedMinutes = passedMinutes -1;
+	            	JOptionPane.showMessageDialog(null, "Noch " + passedMinutes + " Minuten Zeit");
+	            if(passedMinutes == 0){
+	           	 passedMinutes = 0;
+	           	 JOptionPane.showMessageDialog(null, "Die Zeit ist abgelaufen");
+	           	 timeIsOver();
+	           	 passedMinutes = 5;
+	            }
+	        } 
+		});
+		tim.setRepeats(true);
 	}
 	
 	private void validateInput(String input){
@@ -536,11 +614,6 @@ public class GameScreen {
 		return returnText;
 	}
 	
-	private void start(String input) {
-		run = new GameRun();
-		background.setIcon(run.getSingularImage(0));
-	}
-	
 	private String otherActions(String input) {
 		String returnText = "";
 		
@@ -563,5 +636,4 @@ public class GameScreen {
 		
 		return returnText;
 	}
-
 }

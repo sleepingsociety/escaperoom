@@ -56,6 +56,16 @@ public class GameRun {
 		images[1] = new ImageIcon("../EscapeRoom/res/SecondWall/SecondWall.png");
 		images[2] = new ImageIcon("../EscapeRoom/res/ThirdWall/ThirdWall.png");
 		images[3] = new ImageIcon("../EscapeRoom/res/FourthWall/FourthWall.png");
+		gameHasBegun = false;
+		isSafeOpen = false;
+		isSwitchActivated = false;
+		isWallOpen = false;
+		isGroundOpen = false;
+		isMarkerVisible = false;
+		isKeyVisible = false;
+		isCouchOpen = false;
+		isSeedInGround = false;
+		isDeviceActivated = false;
 	}
 	
 }

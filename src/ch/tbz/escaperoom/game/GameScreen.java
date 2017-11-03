@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -32,7 +34,7 @@ import java.awt.SystemColor;
 
 public class GameScreen {
 
-	private JFrame frame;
+	private JFrame frmEscapeMaster;
 	private JTextField inputField;
 	private JLabel background = new JLabel();
 	JTextArea gameFeed = new JTextArea();
@@ -49,7 +51,7 @@ public class GameScreen {
 			public void run() {
 				try {
 					GameScreen window = new GameScreen();
-					window.frame.setVisible(true);
+					window.frmEscapeMaster.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -85,20 +87,22 @@ public class GameScreen {
 		});
 		tim.setRepeats(true);
 		
+		frmEscapeMaster = new JFrame();
+		frmEscapeMaster.setTitle("Escape Master");
+		frmEscapeMaster.setBounds(100, 100, 650, 850);
+		frmEscapeMaster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon icon = new ImageIcon("../EscapeRoom/res/Icon.png");
+		frmEscapeMaster.setIconImage(icon.getImage());
+		frmEscapeMaster.getContentPane().setLayout(null);
 		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 566, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
-		
-		background.setBounds(10, 11, 530, 480);
-		frame.getContentPane().add(background);
+		background.setBounds(10, 11, 600, 529);
+		frmEscapeMaster.getContentPane().add(background);
 		
 
-		gameFeed.setBounds(10, 556, 530, 58);
+		gameFeed.setBounds(10, 606, 600, 58);
 		gameFeed.setEditable(false);
-		frame.getContentPane().add(gameFeed);
+		frmEscapeMaster.getContentPane().add(gameFeed);
 		gameFeed.setColumns(4);
 		
 		inputField = new JTextField();
@@ -108,8 +112,8 @@ public class GameScreen {
 				inputField.setText("");
 			}
 		});
-		inputField.setBounds(10, 627, 530, 77);
-		frame.getContentPane().add(inputField);
+		inputField.setBounds(10, 677, 600, 77);
+		frmEscapeMaster.getContentPane().add(inputField);
 		inputField.setColumns(10);
 		
 		JButton btnClearField = new JButton("Clear Field");
@@ -118,8 +122,8 @@ public class GameScreen {
 				inputField.setText("");
 			}
 		});
-		btnClearField.setBounds(436, 717, 100, 23);
-		frame.getContentPane().add(btnClearField);
+		btnClearField.setBounds(510, 767, 100, 23);
+		frmEscapeMaster.getContentPane().add(btnClearField);
 		
 		JButton btnRestart = new JButton("Restart");
 		btnRestart.addActionListener(new ActionListener() {
@@ -127,8 +131,8 @@ public class GameScreen {
 				resetGame();
 			}
 		});
-		btnRestart.setBounds(10, 717, 89, 23);
-		frame.getContentPane().add(btnRestart);
+		btnRestart.setBounds(10, 767, 89, 23);
+		frmEscapeMaster.getContentPane().add(btnRestart);
 		
 		background.setIcon(new ImageIcon("../EscapeRoom/res/mainMenu.png"));
 		
@@ -138,8 +142,8 @@ public class GameScreen {
 		txtrUmDichNach.setEditable(false);
 		txtrUmDichNach.setRows(3);
 		txtrUmDichNach.setText("Um dich nach Rechts zu drehen, schreibe \"Rechts\" und um dich nachLinks zu drehen, schreibe \"Links\"");
-		txtrUmDichNach.setBounds(10, 503, 530, 40);
-		frame.getContentPane().add(txtrUmDichNach);
+		txtrUmDichNach.setBounds(10, 553, 600, 40);
+		frmEscapeMaster.getContentPane().add(txtrUmDichNach);
 	}
 	
 	private void start(String input) {
@@ -632,6 +636,10 @@ public class GameScreen {
 		}
 		if(input.equalsIgnoreCase("Anleitung")) {
 			background.setIcon(new ImageIcon("../EscapeRoom/res/Anleitung.png"));
+		}
+
+		if(input.equalsIgnoreCase("Stichwörter")) {
+			background.setIcon(new ImageIcon("../EscapeRoom/res/Stichwörter.png"));
 		}
 		
 		return returnText;
